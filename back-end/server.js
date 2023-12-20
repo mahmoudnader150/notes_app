@@ -12,8 +12,6 @@ const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSW
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
     useUnifiedTopology: true, 
    // useUnifiedTopology: true, // Adding the unified topology option
   })
