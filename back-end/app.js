@@ -5,7 +5,7 @@
 /* eslint-disable node/no-extraneous-require */
 const express = require('express');
 const morgan = require('morgan');
-const notesRouter = require('./routes/userRoutes');
+const notesRouter = require('./routes/noteRoutes');
 const app = express();
 
 
