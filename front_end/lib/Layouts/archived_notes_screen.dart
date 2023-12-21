@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ShowNotes extends StatelessWidget {
-  const ShowNotes({super.key});
+class ArchivedNotes extends StatelessWidget {
+  const ArchivedNotes({super.key});
 
   @override
   Widget build(BuildContext context) {

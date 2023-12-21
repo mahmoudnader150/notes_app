@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Cubit/cubit.dart';
 import 'Cubit/states.dart';
-import 'Layouts/show_notes_screen.dart';
+import 'Layouts/main_screen.dart';
 
 void main() {
   bool isDark =false;
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
               // darkTheme: darkTheme,
               themeMode: NoteCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,
-              home: ShowNotes(),
+              home: MainScreen(),
             );
           },
         )
