@@ -25,6 +25,7 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteChangeBottomNavBarState());
   }
 
+
   List<String> titles=[
     "Notes",
     "Your Archived",
@@ -57,8 +58,25 @@ class NoteCubit extends Cubit<NoteStates> {
         label: 'Add Note'
     ),
 
-
   ];
 
+  void sortNotes(){
+    for (int i = 0; i < notes.length - 1; i++) {
+      for (int j = 0; j < notes.length - i - 1; j++) {
+        if (!notes[j].pinned && notes[j + 1].pinned) {
+          // Swap if the current note is unpinned and the next note is pinned
+          Note temp = notes[j];
+          notes[j] = notes[j + 1];
+          notes[j + 1] = temp;
+        }
+      }
+    }
+    emit(NoteSortNotesState());
+  }
+  void changePin(Note note) {
+    note.pinned = !note.pinned;
+    sortNotes();
+    emit(NoteChangePinState());
+  }
 
 }

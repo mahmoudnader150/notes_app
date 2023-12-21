@@ -101,7 +101,23 @@ Widget buildNoteItem(Note model,context,int index){
                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
                    ),
                    Spacer(),
-                   Icon(CupertinoIcons.pin,size: 25,color: Colors.white,)
+                   IconButton(
+                     onPressed: (){
+                       NoteCubit.get(context).changePin(model);
+                     },
+                     icon:CircleAvatar(
+                       radius: 15.0,
+                       backgroundColor:
+                       (model.pinned)?Colors.grey[800]:Colors.white,
+                       child: Icon(
+                         CupertinoIcons.pin,
+                         size: 18.0,
+                         color:   (model.pinned)?Colors.white:Colors.black,
+                       )
+                     ),
+                     iconSize: 25,
+                     color: Colors.white,
+                   )
                  ],
                ),
                SizedBox(height: 20,),
@@ -114,9 +130,9 @@ Widget buildNoteItem(Note model,context,int index){
                Row(
                  children: [
                    Icon(Icons.archive,size: 35,color: Colors.white,),
-                   SizedBox(width: 15,),
+                   SizedBox(width: 20,),
                    Icon(Icons.delete_rounded,size: 35,color: Colors.white,),
-                   SizedBox(width: 15,),
+                   SizedBox(width: 20,),
                    Icon(Icons.edit_outlined,size: 35,color: Colors.white,),
                  ],
                )

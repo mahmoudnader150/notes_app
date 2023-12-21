@@ -20,7 +20,7 @@ class MainScreen extends StatelessWidget {
               actions: [
                 IconButton(onPressed: (){
                   NoteCubit.get(context).changeAppMode();
-                }, icon: Icon(Icons.sunny_snowing))
+                }, icon: Icon(Icons.sunny_snowing,color:Colors.grey[800] ,))
               ],
               title:  Center(child: Text(cubit.titles[cubit.currentIndex],style: TextStyle(color: Colors.grey[800]),)),
               elevation: 0.0,
