@@ -44,6 +44,8 @@ class NoteCubit extends Cubit<NoteStates> {
     Note(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
   ];
 
+  List<Note> archivedNotes=[];
+
   List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
         icon: Icon(Icons.home),
@@ -73,10 +75,27 @@ class NoteCubit extends Cubit<NoteStates> {
     }
     emit(NoteSortNotesState());
   }
+
   void changePin(Note note) {
     note.pinned = !note.pinned;
     sortNotes();
     emit(NoteChangePinState());
   }
+
+  void changeArchive(Note note) {
+    note.archived = !note.archived;
+    if(note.archived){
+      notes.remove(note);
+      archivedNotes.add(note);
+      emit(NoteAddArchiveState());
+    }else{
+      notes.add(note);
+      archivedNotes.remove(note);
+      emit(NoteRemoveArchiveState());
+    }
+    //sortNotes();
+    emit(NoteChangeArchiveState());
+  }
+
 
 }

@@ -129,7 +129,16 @@ Widget buildNoteItem(Note model,context,int index){
                SizedBox(height: 20,),
                Row(
                  children: [
-                   Icon(Icons.archive,size: 35,color: Colors.white,),
+                   IconButton(
+                     onPressed: (){
+                       NoteCubit.get(context).changeArchive(model);
+                     },
+                     icon: Icon(
+                           Icons.archive_outlined,
+                           size: 35.0,
+                           color: Colors.white,
+                         )
+                   ),
                    SizedBox(width: 20,),
                    Icon(Icons.delete_rounded,size: 35,color: Colors.white,),
                    SizedBox(width: 20,),

@@ -5,6 +5,7 @@ class Note{
   late String content;
   late String color;
   late bool pinned;
+  late bool archived;
 
   Note({
     required this.id,
@@ -12,6 +13,7 @@ class Note{
     this.content="",
     this.color="grey",
     this.createdAt ="2023-12-12",
-    this.pinned = false
+    this.pinned = false,
+    this.archived = false
 });
 }
