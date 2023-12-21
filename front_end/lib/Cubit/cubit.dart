@@ -6,6 +6,7 @@ import 'package:note_app/Cubit/states.dart';
 import 'package:note_app/Layouts/add_note_screen.dart';
 import 'package:note_app/Layouts/archived_notes_screen.dart';
 import 'package:note_app/Layouts/show_notes_screen.dart';
+import 'package:note_app/Models/note_model.dart';
 
 class NoteCubit extends Cubit<NoteStates> {
 
@@ -33,7 +34,13 @@ class NoteCubit extends Cubit<NoteStates> {
     ShowNotes(),
     ArchivedNotes(),
     AddNote(),
+  ];
 
+  List<Note> notes=[
+    Note(id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
+    Note(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
+    Note(id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
+    Note(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
   ];
 
   List<BottomNavigationBarItem> bottomItems = [

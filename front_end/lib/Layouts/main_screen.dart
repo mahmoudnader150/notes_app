@@ -16,12 +16,13 @@ class MainScreen extends StatelessWidget {
           var  cubit = NoteCubit.get(context);
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.grey[300],
               actions: [
                 IconButton(onPressed: (){
                   NoteCubit.get(context).changeAppMode();
                 }, icon: Icon(Icons.sunny_snowing))
               ],
-              title:  Center(child: Text(cubit.titles[cubit.currentIndex])),
+              title:  Center(child: Text(cubit.titles[cubit.currentIndex],style: TextStyle(color: Colors.grey[800]),)),
               elevation: 0.0,
             ),
             body: cubit.screens[cubit.currentIndex],
