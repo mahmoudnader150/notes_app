@@ -15,7 +15,7 @@ class ArchivedNotes extends StatelessWidget {
         listener: (context,state){},
 
         builder:(context,state) {
-          print(NoteCubit.get(context).notesFromApi);
+
           return (NoteCubit.get(context).archivedNotes.length>0)?
           Scaffold(
               backgroundColor: Colors.grey[300],
@@ -66,7 +66,7 @@ class ArchivedNotes extends StatelessWidget {
 }
 
 
-Widget buildNoteItem(NoteModel model,context,int index){
+Widget buildNoteItem(Note model,context,int index){
 
   Color? noteColor = Color(0xFF303030) ;
   if(model.color=="blue") noteColor = Color(0xFF01579B);

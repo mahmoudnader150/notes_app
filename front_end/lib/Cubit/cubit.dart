@@ -41,14 +41,13 @@ class NoteCubit extends Cubit<NoteStates> {
     AddNote(),
   ];
 
-  List<NoteModel> notes=[
-    NoteModel(id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
-    NoteModel(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
-    NoteModel(id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
-    NoteModel(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
+  List<Note> notes=[Note (id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
+    Note (id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
+    Note (id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
+    Note (id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
   ];
 
-  List<NoteModel> archivedNotes=[];
+  List<Note> archivedNotes=[];
 
   List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
@@ -71,7 +70,7 @@ class NoteCubit extends Cubit<NoteStates> {
       for (int j = 0; j < notes.length - i - 1; j++) {
         if (!notes[j].pinned && notes[j + 1].pinned) {
           // Swap if the current note is unpinned and the next note is pinned
-          NoteModel temp = notes[j];
+          Note temp = notes[j];
           notes[j] = notes[j + 1];
           notes[j + 1] = temp;
         }
@@ -80,13 +79,13 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteSortNotesState());
   }
 
-  void changePin(NoteModel note) {
+  void changePin(Note note) {
     note.pinned = !note.pinned;
     sortNotes();
     emit(NoteChangePinState());
   }
 
-  void changeArchive(NoteModel note) {
+  void changeArchive(Note note) {
     note.archived = !note.archived;
     if(note.archived){
       notes.remove(note);
@@ -101,7 +100,7 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteChangeArchiveState());
   }
 
-  NotesFromApi? notesFromApi;
+
   // void getNotes(){
   //   if(notes.length==0){
   //     emit(NoteGetFromApiLoadingState());
@@ -121,9 +120,8 @@ class NoteCubit extends Cubit<NoteStates> {
   //   }
   // }
 
-
   Future<void> fetchDataFromBackend() async {
-    final String apiUrl = 'http://127.0.0.1:8000/api/notes/';
+    final String apiUrl = 'http://192.168.1.6:8000/api/notes/';
 
     try {
       emit(NoteGetFromApiLoadingState());
@@ -131,7 +129,10 @@ class NoteCubit extends Cubit<NoteStates> {
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
-        print(jsonData);
+        // Parse JSON data into Data model
+        Data data = Data.fromJson(jsonData);
+        print(data);
+        this.notes = data.notes;
         emit(NoteGetFromApiSuccessState(data:jsonData)); // Emit success state
       } else {
         print('Request failed with status: ${response.statusCode}');
