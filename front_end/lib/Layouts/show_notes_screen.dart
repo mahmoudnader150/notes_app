@@ -20,7 +20,7 @@ class ShowNotes extends StatelessWidget {
           print(NoteCubit.get(context).notes);
           return (NoteCubit.get(context).notes.length>0)?
           Scaffold(
-            backgroundColor: Colors.grey[300],
+            backgroundColor: Colors.grey[400],
               body:ListView.separated(
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) => buildNoteItem(NoteCubit.get(context).notes[index],context,index),

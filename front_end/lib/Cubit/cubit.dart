@@ -93,7 +93,7 @@ class NoteCubit extends Cubit<NoteStates> {
       archivedNotes.remove(note);
       emit(NoteRemoveArchiveState());
     }
-    //sortNotes();
+    sortNotes();
     emit(NoteChangeArchiveState());
   }
 

@@ -38,13 +38,14 @@ class ArchivedNotes extends StatelessWidget {
               )
           ):
           Scaffold(
+            backgroundColor: Colors.grey[400],
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.error_outline,
-                    color:  Colors.grey[600],
+                    color:  Colors.grey[800],
                     size: 100,
                   ),
                   Text(
@@ -52,7 +53,7 @@ class ArchivedNotes extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: Colors.grey[600]
+                        color: Colors.grey[800]
                     ),
                   )
                 ],

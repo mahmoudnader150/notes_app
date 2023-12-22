@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
           var  cubit = NoteCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.grey[300],
+              backgroundColor: Colors.grey[400],
               actions: [
                 IconButton(onPressed: (){
                   NoteCubit.get(context).changeAppMode();
@@ -27,10 +27,11 @@ class MainScreen extends StatelessWidget {
             ),
             body: cubit.screens[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: Colors.grey[400],
                 type: BottomNavigationBarType.fixed,
                 currentIndex: cubit.currentIndex,
                 elevation: 0.0,
-                selectedItemColor: Colors.grey[400],
+                selectedItemColor: Colors.grey[800],
                 onTap: (index) {
                   cubit.changeIndex(index);
                 },
