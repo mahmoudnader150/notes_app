@@ -1,40 +1,12 @@
-class NotesFromApi{
-  late bool status;
-  late NoteDataModel data;
-
-  NotesFromApi.fromJson(Map<String,dynamic> json){
-    status = json['status'];
-    data = NoteDataModel.fromJson(json['data']);
-  }
-
-
-  void myPrint(){
-    print(this.status);
-    print("\n");
-    print(data);
-  }
-}
-class NoteDataModel{
-  List<NoteModel> data=[];
-
-  NoteDataModel.fromJson(Map<String,dynamic> json){
-
-    data = json['data'].forEach((element){
-      data.add(NoteModel.fromJson(element));
-    });
-  }
-}
-
-class NoteModel{
-  late String name;
-  late String id;
-  late String createdAt;
-  late String content;
-  late String color;
+class Note {
   late bool pinned;
+  late String id;
+  late String name;
+  late String color;
+  late String content;
   late bool archived;
-
-  NoteModel({
+  late String createdAt;
+  Note({
     required this.id,
     required this.name,
     this.content="",
@@ -42,15 +14,48 @@ class NoteModel{
     this.createdAt ="2023-12-12",
     this.pinned = false,
     this.archived = false
-});
-  NoteModel.fromJson(Map<String,dynamic> json){
-    id = json['id'];
-    name = json['name'];
-    content = json['content'];
-    color = json['color'];
-    createdAt = json['createdAt'];
-    archived = json['archived'];
-    pinned = json['pinned'];
+  });
+
+  factory Note.fromJson(Map<String, dynamic> json) {
+    return Note(
+      pinned: json['pinned'] ?? false,
+      id: json['_id'],
+      name: json['name'],
+      color: json['color'],
+      content: json['content'],
+      archived: json['archived'] ?? false,
+    );
+  }
+  @override
+  String toString() {
+    return 'Note { pinned: $pinned, id: $id, name: $name, color: $color, content: $content, archived: $archived }';
+  }
+}
+
+class Data {
+  String status;
+  int results;
+  List<Note> notes;
+
+  Data({
+    required this.status,
+    required this.results,
+    required this.notes,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    var notesList = json['data']['notes'] as List;
+    List<Note> parsedNotes = notesList.map((note) => Note.fromJson(note)).toList();
+
+    return Data(
+      status: json['status'],
+      results: json['results'],
+      notes: parsedNotes,
+    );
   }
 
+  @override
+  String toString() {
+    return 'Data { status: $status, results: $results, notes: $notes }';
+  }
 }
