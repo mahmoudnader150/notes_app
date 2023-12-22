@@ -6,6 +6,13 @@ class NotesFromApi{
     status = json['status'];
     data = NoteDataModel.fromJson(json['data']);
   }
+
+
+  void myPrint(){
+    print(this.status);
+    print("\n");
+    print(data);
+  }
 }
 class NoteDataModel{
   List<NoteModel> data=[];
