@@ -22,6 +22,10 @@ const noteSchema = mongoose.Schema({
     archived:{
         type:Boolean,
         default:false,
+    },
+    pinned:{
+        type:Boolean,
+        default:false,
     }
  
 
