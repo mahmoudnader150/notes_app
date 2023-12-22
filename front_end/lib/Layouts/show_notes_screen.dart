@@ -67,7 +67,7 @@ class ShowNotes extends StatelessWidget {
 }
 
 
-Widget buildNoteItem(Note model,context,int index){
+Widget buildNoteItem(NoteModel model,context,int index){
   Color? noteColor = Color(0xFF303030) ;
   if(model.color=="blue") noteColor = Color(0xFF01579B);
   if(model.color=="green") noteColor = Color(0xFF2E7D32);

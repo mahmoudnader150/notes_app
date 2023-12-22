@@ -37,14 +37,14 @@ class NoteCubit extends Cubit<NoteStates> {
     AddNote(),
   ];
 
-  List<Note> notes=[
-    Note(id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
-    Note(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
-    Note(id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
-    Note(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
+  List<NoteModel> notes=[
+    NoteModel(id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
+    NoteModel(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
+    NoteModel(id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
+    NoteModel(id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
   ];
 
-  List<Note> archivedNotes=[];
+  List<NoteModel> archivedNotes=[];
 
   List<BottomNavigationBarItem> bottomItems = [
     BottomNavigationBarItem(
@@ -67,7 +67,7 @@ class NoteCubit extends Cubit<NoteStates> {
       for (int j = 0; j < notes.length - i - 1; j++) {
         if (!notes[j].pinned && notes[j + 1].pinned) {
           // Swap if the current note is unpinned and the next note is pinned
-          Note temp = notes[j];
+          NoteModel temp = notes[j];
           notes[j] = notes[j + 1];
           notes[j + 1] = temp;
         }
@@ -76,13 +76,13 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteSortNotesState());
   }
 
-  void changePin(Note note) {
+  void changePin(NoteModel note) {
     note.pinned = !note.pinned;
     sortNotes();
     emit(NoteChangePinState());
   }
 
-  void changeArchive(Note note) {
+  void changeArchive(NoteModel note) {
     note.archived = !note.archived;
     if(note.archived){
       notes.remove(note);
