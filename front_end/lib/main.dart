@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'Constants/bloc_observer.dart';
 import 'Cubit/cubit.dart';
 import 'Cubit/states.dart';
 import 'Layouts/main_screen.dart';
+import 'network/dio_package.dart';
 
 void main() {
   bool isDark =false;
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+
   runApp( MyApp(isDark: isDark));
 }
 
@@ -31,7 +37,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context)=>NoteCubit()
+              create: (context)=>NoteCubit()..fetchDataFromBackend()
           )
         ],
         child: BlocConsumer<NoteCubit,NoteStates>(

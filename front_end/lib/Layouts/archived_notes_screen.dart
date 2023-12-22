@@ -15,7 +15,7 @@ class ArchivedNotes extends StatelessWidget {
         listener: (context,state){},
 
         builder:(context,state) {
-          print(NoteCubit.get(context).notes);
+          print(NoteCubit.get(context).notesFromApi);
           return (NoteCubit.get(context).archivedNotes.length>0)?
           Scaffold(
               backgroundColor: Colors.grey[300],

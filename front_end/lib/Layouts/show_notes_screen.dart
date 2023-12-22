@@ -17,7 +17,7 @@ class ShowNotes extends StatelessWidget {
         listener: (context,state){},
 
         builder:(context,state) {
-          print(NoteCubit.get(context).notes);
+
           return (NoteCubit.get(context).notes.length>0)?
           Scaffold(
             backgroundColor: Colors.grey[400],
