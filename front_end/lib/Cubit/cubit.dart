@@ -7,6 +7,10 @@ import 'package:note_app/Layouts/add_note_screen.dart';
 import 'package:note_app/Layouts/archived_notes_screen.dart';
 import 'package:note_app/Layouts/show_notes_screen.dart';
 import 'package:note_app/Models/note_model.dart';
+import 'package:note_app/network/end_points.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../network/dio_package.dart';
 
 class NoteCubit extends Cubit<NoteStates> {
 
@@ -95,6 +99,48 @@ class NoteCubit extends Cubit<NoteStates> {
     }
     sortNotes();
     emit(NoteChangeArchiveState());
+  }
+
+  NotesFromApi? notesFromApi;
+  // void getNotes(){
+  //   if(notes.length==0){
+  //     emit(NoteGetFromApiLoadingState());
+  //
+  //     DioHelper.getData(
+  //         url: GET_NOTE,
+  //     ).then((value){
+  //       notesFromApi = NotesFromApi.fromJson(value as Map<String, dynamic>);
+  //       notesFromApi?.myPrint();
+  //       emit(NoteGetFromApiSuccessState(data: null));
+  //     }).catchError((error){
+  //       emit(NoteGetFromApiErrorState());
+  //       print("error ${error.toString()}");
+  //     });
+  //   }else{
+  //     emit(NoteGetFromApiLoadingState());
+  //   }
+  // }
+
+
+  Future<void> fetchDataFromBackend() async {
+    final String apiUrl = 'http://127.0.0.1:8000/api/notes/';
+
+    try {
+      emit(NoteGetFromApiLoadingState());
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        print(jsonData);
+        emit(NoteGetFromApiSuccessState(data:jsonData)); // Emit success state
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        emit(NoteGetFromApiErrorState()); // Emit error state
+      }
+    } catch (error) {
+      print('Error fetching data: $error');
+      emit(NoteGetFromApiErrorState()); // Emit error state
+    }
   }
 
 

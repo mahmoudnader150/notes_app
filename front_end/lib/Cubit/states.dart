@@ -9,3 +9,14 @@ class NoteChangePinState extends NoteStates{}
 class NoteChangeArchiveState extends NoteStates{}
 class NoteAddArchiveState extends NoteStates{}
 class NoteRemoveArchiveState extends NoteStates{}
+
+class NoteGetFromApiLoadingState extends NoteStates{
+
+}
+class NoteGetFromApiSuccessState extends NoteStates{
+  late final data;
+  NoteGetFromApiSuccessState({required this.data}){
+    print(data);
+  }
+}
+class NoteGetFromApiErrorState extends NoteStates{}
