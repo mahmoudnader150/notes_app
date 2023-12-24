@@ -7,8 +7,8 @@ class Note {
   late bool archived;
   late String createdAt;
   Note({
-    required this.id,
-    required this.name,
+    this.id = "",
+    this.name="name",
     this.content="",
     this.color="grey",
     this.createdAt ="2023-12-12",
@@ -19,10 +19,10 @@ class Note {
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
       pinned: json['pinned'] ?? false,
-      id: json['_id'],
-      name: json['name'],
-      color: json['color'],
-      content: json['content'],
+      id: json['_id']??DateTime.now().toIso8601String(),
+      name: json['name']??"name",
+      color: json['color']??"grey",
+      content: json['content']??"content",
       archived: json['archived'] ?? false,
     );
   }

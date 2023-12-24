@@ -145,4 +145,17 @@ class NoteCubit extends Cubit<NoteStates> {
   }
 
 
+  Future<void> postData(String name,String content) async {
+    emit(NoteAddFromApiLoadingState());
+    Map<String,dynamic> data = {
+      'name':name,
+      'content':content,
+    };
+    DioHelper.postData(url: 'http://192.168.1.6:8000/api/notes/', data: data);
+  // fetchDataFromBackend();
+   emit(NoteAddFromApiSuccessState());
+  }
+
+
+
 }

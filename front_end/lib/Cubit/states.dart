@@ -20,3 +20,8 @@ class NoteGetFromApiSuccessState extends NoteStates{
   }
 }
 class NoteGetFromApiErrorState extends NoteStates{}
+
+
+class NoteAddFromApiLoadingState extends NoteStates{}
+class NoteAddFromApiSuccessState extends NoteStates{}
+class NoteAddFromApiErrorState extends NoteStates{}

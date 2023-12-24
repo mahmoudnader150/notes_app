@@ -25,15 +25,8 @@ class DioHelper {
   static Future<Response> postData({
     required String url,
     required Map<String, dynamic> data,
-    String lang = 'en',
   }) async
   {
-    dio.options.headers =
-    {
-      'lang': lang,
-      'Content-Type': 'application/json',
-    };
-
     return dio.post(
       url,
       data: data,

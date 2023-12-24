@@ -33,6 +33,7 @@ class MainScreen extends StatelessWidget {
                 elevation: 0.0,
                 selectedItemColor: Colors.grey[800],
                 onTap: (index) {
+                cubit.fetchDataFromBackend();
                   cubit.changeIndex(index);
                 },
                 items:cubit.bottomItems

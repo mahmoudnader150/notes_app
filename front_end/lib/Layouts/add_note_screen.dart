@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/network/dio_package.dart';
 
 import '../Constants/components.dart';
 import '../Cubit/cubit.dart';
 import '../Cubit/states.dart';
+import '../Models/note_model.dart';
 
 class AddNote extends StatelessWidget {
   AddNote({super.key});
 
-  var habitNameController = TextEditingController();
-  var habitDescController = TextEditingController();
+  var noteNameController = TextEditingController();
+  var noteContentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class AddNote extends StatelessWidget {
                       ),
                       SizedBox(height: 25,),
                       defaultFormField(
-                          controller: habitNameController,
+                          controller: noteNameController,
                           type: TextInputType.text,
                           validate: (value){
                             if(value!.isEmpty){
@@ -50,7 +52,7 @@ class AddNote extends StatelessWidget {
                       ),
                       SizedBox(height: 25,),
                       defaultFormField(
-                          controller: habitDescController,
+                          controller: noteContentController,
                           type: TextInputType.text,
                           validate: (value){},
                           label: "Note Content (optional)",
@@ -99,13 +101,17 @@ class AddNote extends StatelessWidget {
                       ),
                       SizedBox(height: 20,),
                       defaultButton(function: ()async{
-                          habitNameController.text = "";
-                          habitDescController.text = "";
+                        if(formKey.currentState!.validate()) {
+                          NoteCubit.get(context).postData(noteContentController.text, noteContentController.text);                          // Note note = Note(name:noteNameController.text,content: noteContentController.text );
+                          // print(note);
+                          NoteCubit.get(context).fetchDataFromBackend();
+
+                        }
                       }, text: "Add Note"),
                       SizedBox(height: 20,),
                       defaultButton(function: (){
-                        habitNameController.text = "";
-                        habitDescController.text = "";
+                        noteNameController.text = "";
+                        noteContentController.text = "";
                       }, text: "Clear",
                       ),
                     ],
