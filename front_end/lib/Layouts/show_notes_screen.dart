@@ -67,11 +67,11 @@ class ShowNotes extends StatelessWidget {
 }
 
 
-Widget buildNoteItem(Note model,context,int index){
+Widget buildNoteItem(Note note,context,int index){
   Color? noteColor = Color(0xFF303030) ;
-  if(model.color=="blue") noteColor = Color(0xFF01579B);
-  if(model.color=="green") noteColor = Color(0xFF2E7D32);
-  if(model.color=="red") noteColor =  Color(0xFFB71C1C);
+  if(note.color=="blue") noteColor = Color(0xFF01579B);
+  if(note.color=="green") noteColor = Color(0xFF2E7D32);
+  if(note.color=="red") noteColor =  Color(0xFFB71C1C);
 
   return InkWell(
     onTap: (){
@@ -97,22 +97,22 @@ Widget buildNoteItem(Note model,context,int index){
           children: [
                Row(
                  children: [
-                   Text(model.name,
+                   Text(note.name,
                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
                    ),
                    Spacer(),
                    IconButton(
                      onPressed: (){
-                       NoteCubit.get(context).changePin(model);
+                       NoteCubit.get(context).changePin(note);
                      },
                      icon:CircleAvatar(
                        radius: 15.0,
                        backgroundColor:
-                       (model.pinned)?Colors.grey[800]:Colors.white,
+                       (note.pinned)?Colors.grey[800]:Colors.white,
                        child: Icon(
                          CupertinoIcons.pin,
                          size: 18.0,
-                         color:  (model.pinned)?Colors.white:Colors.black,
+                         color:  (note.pinned)?Colors.white:Colors.black,
                        )
                      ),
                      iconSize: 25,
@@ -122,7 +122,7 @@ Widget buildNoteItem(Note model,context,int index){
                ),
                SizedBox(height: 20,),
                Text(
-                 model.content,
+                 note.content,
                  maxLines: 3,
                  style: TextStyle(fontSize: 16,color: Colors.white70),
                ),
@@ -131,7 +131,7 @@ Widget buildNoteItem(Note model,context,int index){
                  children: [
                    IconButton(
                      onPressed: (){
-                       NoteCubit.get(context).setArchive(model);
+                       NoteCubit.get(context).setArchive(note);
                      },
                      icon: Icon(
                            Icons.archive_outlined,
@@ -142,7 +142,8 @@ Widget buildNoteItem(Note model,context,int index){
                    SizedBox(width: 20,),
                    IconButton(
                        onPressed: (){
-
+                           print(note.id);
+                           NoteCubit.get(context).deleteData(note.id);
                        },
                        icon: Icon(
                          Icons.delete_rounded,

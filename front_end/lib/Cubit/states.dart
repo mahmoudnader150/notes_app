@@ -11,9 +11,8 @@ class NoteAddArchiveState extends NoteStates{}
 class NoteRemoveArchiveState extends NoteStates{}
 class NoteChangeColorState extends NoteStates{}
 
-class NoteGetFromApiLoadingState extends NoteStates{
-
-}
+// GET STATES
+class NoteGetFromApiLoadingState extends NoteStates{}
 class NoteGetFromApiSuccessState extends NoteStates{
   late final data;
   NoteGetFromApiSuccessState({required this.data}){
@@ -22,7 +21,12 @@ class NoteGetFromApiSuccessState extends NoteStates{
 }
 class NoteGetFromApiErrorState extends NoteStates{}
 
-
+// POST STATES
 class NoteAddFromApiLoadingState extends NoteStates{}
 class NoteAddFromApiSuccessState extends NoteStates{}
 class NoteAddFromApiErrorState extends NoteStates{}
+
+// DELETE STATES
+class NoteDeleteFromApiLoadingState extends NoteStates{}
+class NoteDeleteFromApiSuccessState extends NoteStates{}
+class NoteDeleteFromApiErrorState extends NoteStates{}

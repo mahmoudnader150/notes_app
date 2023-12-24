@@ -163,6 +163,37 @@ class NoteCubit extends Cubit<NoteStates> {
    emit(NoteAddFromApiSuccessState());
   }
 
+  // Future<void> deleteData(String id) async {
+  //   final url = 'http://192.168.1.6:8000/api/notes/${id}'; // Replace with your API endpoint
+  //
+  //   try {
+  //     final response = await DioHelper.delete(url);
+  //
+  //     if (response.statusCode == 200) {
+  //       // Successfully deleted
+  //       print('Data deleted successfully');
+  //     } else {
+  //       // Failed to delete
+  //       print('Failed to delete data. Status code: ${response.statusCode}');
+  //     }
+  //   } catch (error) {
+  //     print('Error deleting data: $error');
+  //   }
+  // }
 
+  Future<void> deleteData(String id) async {
+    emit(NoteDeleteFromApiLoadingState());
+    final url = 'http://192.168.1.6:8000/api/notes/${id}'; // Replace with your API endpoint
+    final response = await http.delete(Uri.parse(url));
 
+    if (response.statusCode == 204) {
+      emit(NoteDeleteFromApiSuccessState());
+      fetchDataFromBackend();
+      print('Data deleted successfully');
+    } else {
+      emit(NoteDeleteFromApiErrorState());
+      // Failed to delete
+      print('Failed to delete data. Status code: ${response.statusCode}');
+    }
+  }
 }
