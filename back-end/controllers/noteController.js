@@ -8,7 +8,7 @@ exports.createNote = async (req, res) => {
     try{
 
         const newNote = await Note.create(req.body);
-
+        
         res.status(201).json({
             status: 'success',
             data:{
@@ -17,6 +17,7 @@ exports.createNote = async (req, res) => {
         })
 
     }catch(err){
+        console.log(err)
         res.status(400).json({
             status:'fail',
             message:err
