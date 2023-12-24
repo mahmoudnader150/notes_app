@@ -30,3 +30,8 @@ class NoteAddFromApiErrorState extends NoteStates{}
 class NoteDeleteFromApiLoadingState extends NoteStates{}
 class NoteDeleteFromApiSuccessState extends NoteStates{}
 class NoteDeleteFromApiErrorState extends NoteStates{}
+
+// UPDATE PINNED STATES
+class NotePinApiLoadingState extends NoteStates{}
+class NotePinApiSuccessState extends NoteStates{}
+class NotePinApiErrorState extends NoteStates{}

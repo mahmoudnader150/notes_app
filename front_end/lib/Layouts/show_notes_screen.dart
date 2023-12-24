@@ -40,26 +40,8 @@ class ShowNotes extends StatelessWidget {
               )
           ):
           Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.error_outline,
-                    color:  Colors.grey[600],
-                    size: 100,
-                  ),
-                  Text(
-                    "No Notes added to yet",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.grey[600]
-                    ),
-                  )
-                ],
-              ),
-            ),
+            backgroundColor: Colors.grey[400],
+            body:  Center(child: CircularProgressIndicator(color: Colors.grey[700],)),
           );
         }
     );
@@ -103,7 +85,7 @@ Widget buildNoteItem(Note note,context,int index){
                    Spacer(),
                    IconButton(
                      onPressed: (){
-                       NoteCubit.get(context).changePin(note);
+                       NoteCubit.get(context).updatePin(note);
                      },
                      icon:CircleAvatar(
                        radius: 15.0,

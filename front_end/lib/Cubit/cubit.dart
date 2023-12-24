@@ -47,11 +47,7 @@ class NoteCubit extends Cubit<NoteStates> {
     AddNote(),
   ];
 
-  List<Note> notes=[Note (id: "123456", name: "Note one",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "grey",createdAt: "10:00 AM"),
-    Note (id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "red",createdAt: "10:00 AM"),
-    Note (id: "123456", name: "Note Three",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "blue",createdAt: "10:00 AM"),
-    Note (id: "123456", name: "Note Two",content: "Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented Content for my note to be presented",color: "green",createdAt: "10:00 AM"),
-  ];
+  List<Note> notes= [];
 
   List<Note> archivedNotes=[];
 
@@ -135,10 +131,16 @@ class NoteCubit extends Cubit<NoteStates> {
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
+
         // Parse JSON data into Data model
         Data data = Data.fromJson(jsonData);
-        print(data);
+        print(data); // Debugging purpose
+
+        // assign local to DB from API
         this.notes = data.notes;
+
+        // to re-sort after fetching ...
+        sortNotes();
         emit(NoteGetFromApiSuccessState(data:jsonData)); // Emit success state
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -183,7 +185,7 @@ class NoteCubit extends Cubit<NoteStates> {
 
   Future<void> deleteData(String id) async {
     emit(NoteDeleteFromApiLoadingState());
-    final url = 'http://192.168.1.6:8000/api/notes/${id}'; // Replace with your API endpoint
+    final url = 'http://192.168.1.6:8000/api/notes/${id}';
     final response = await http.delete(Uri.parse(url));
 
     if (response.statusCode == 204) {
@@ -194,6 +196,31 @@ class NoteCubit extends Cubit<NoteStates> {
       emit(NoteDeleteFromApiErrorState());
       // Failed to delete
       print('Failed to delete data. Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<void> updatePin(Note note) async {
+    final url = 'http://192.168.1.6:8000/api/notes/${note.id}';
+    note.pinned = !note.pinned;
+
+    final Map<String, dynamic> newData = {
+      'pinned':note.pinned
+    };
+
+    emit(NotePinApiLoadingState());
+    final response = await http.patch(
+      Uri.parse(url),
+      body: json.encode(newData),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      emit(NotePinApiSuccessState());
+      fetchDataFromBackend();
+      print('Data updated successfully');
+    } else {
+      emit(NotePinApiErrorState());
+      print('Failed to update data. Status code: ${response.statusCode}');
     }
   }
 }
