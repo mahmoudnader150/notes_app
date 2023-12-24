@@ -29,6 +29,12 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteChangeBottomNavBarState());
   }
 
+  String cubitColor = "grey";
+  void setColor(String clr){
+    if(clr == cubitColor) cubitColor="grey";
+    else cubitColor = clr;
+    emit(NoteChangeColorState());
+  }
 
   List<String> titles=[
     "Notes",
@@ -85,7 +91,7 @@ class NoteCubit extends Cubit<NoteStates> {
     emit(NoteChangePinState());
   }
 
-  void changeArchive(Note note) {
+  void setArchive(Note note) {
     note.archived = !note.archived;
     if(note.archived){
       notes.remove(note);
@@ -145,11 +151,12 @@ class NoteCubit extends Cubit<NoteStates> {
   }
 
 
-  Future<void> postData(String name,String content) async {
+  Future<void> postData(String name,String content,String color) async {
     emit(NoteAddFromApiLoadingState());
     Map<String,dynamic> data = {
       'name':name,
       'content':content,
+      'color':color
     };
     DioHelper.postData(url: 'http://192.168.1.6:8000/api/notes/', data: data);
   // fetchDataFromBackend();

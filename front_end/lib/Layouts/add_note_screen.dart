@@ -13,6 +13,8 @@ class AddNote extends StatelessWidget {
   var noteNameController = TextEditingController();
   var noteContentController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+  String color = "grey";
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NoteCubit,NoteStates>(
@@ -72,24 +74,33 @@ class AddNote extends StatelessWidget {
                              child: Row(
                                children: [
                                  InkWell(
-                                   onTap: (){},
+                                   onTap: (){
+                                     NoteCubit.get(context).setColor("red");
+                                   },
                                    child: CircleAvatar(
+                                     child: NoteCubit.get(context).cubitColor=="red"?Icon(Icons.check):null,
                                      radius: 20,
                                      backgroundColor: Color(0xFFB71C1C),
                                    ),
                                  ),
                                  SizedBox(width: 20,),
                                  InkWell(
-                                   onTap: (){},
+                                   onTap: (){
+                                     NoteCubit.get(context).setColor("blue");
+                                   },
                                    child: CircleAvatar(
+                                     child:NoteCubit.get(context).cubitColor=="blue"?Icon(Icons.check):null ,
                                      radius: 20,
                                      backgroundColor: Color(0xFF01579B),
                                    ),
                                  ),
                                  SizedBox(width: 20,),
                                  InkWell(
-                                   onTap: (){},
+                                   onTap: (){
+                                     NoteCubit.get(context).setColor("green");
+                                   },
                                    child: CircleAvatar(
+                                     child:NoteCubit.get(context).cubitColor=="green"?Icon(Icons.check):null ,
                                      radius: 20,
                                      backgroundColor: Color(0xFF2E7D32),
                                    ),
@@ -102,7 +113,7 @@ class AddNote extends StatelessWidget {
                       SizedBox(height: 20,),
                       defaultButton(function: ()async{
                         if(formKey.currentState!.validate()) {
-                          NoteCubit.get(context).postData(noteContentController.text, noteContentController.text);                          // Note note = Note(name:noteNameController.text,content: noteContentController.text );
+                          NoteCubit.get(context).postData(noteNameController.text, noteContentController.text,NoteCubit.get(context).cubitColor);                          // Note note = Note(name:noteNameController.text,content: noteContentController.text );
                           // print(note);
                           NoteCubit.get(context).fetchDataFromBackend();
 
@@ -112,6 +123,7 @@ class AddNote extends StatelessWidget {
                       defaultButton(function: (){
                         noteNameController.text = "";
                         noteContentController.text = "";
+                        NoteCubit.get(context).setColor("grey");
                       }, text: "Clear",
                       ),
                     ],

@@ -112,7 +112,7 @@ Widget buildNoteItem(Note model,context,int index){
                        child: Icon(
                          CupertinoIcons.pin,
                          size: 18.0,
-                         color:   (model.pinned)?Colors.white:Colors.black,
+                         color:  (model.pinned)?Colors.white:Colors.black,
                        )
                      ),
                      iconSize: 25,
@@ -131,7 +131,7 @@ Widget buildNoteItem(Note model,context,int index){
                  children: [
                    IconButton(
                      onPressed: (){
-                       NoteCubit.get(context).changeArchive(model);
+                       NoteCubit.get(context).setArchive(model);
                      },
                      icon: Icon(
                            Icons.archive_outlined,
@@ -140,7 +140,16 @@ Widget buildNoteItem(Note model,context,int index){
                          )
                    ),
                    SizedBox(width: 20,),
-                   Icon(Icons.delete_rounded,size: 35,color: Colors.white,),
+                   IconButton(
+                       onPressed: (){
+
+                       },
+                       icon: Icon(
+                         Icons.delete_rounded,
+                         size: 35.0,
+                         color: Colors.white,
+                       )
+                   ),
                    SizedBox(width: 20,),
                    Icon(Icons.edit_outlined,size: 35,color: Colors.white,),
                  ],

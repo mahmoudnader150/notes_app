@@ -113,7 +113,7 @@ Widget buildNoteItem(Note model,context,int index){
                   children: [
                     IconButton(
                         onPressed: (){
-                          NoteCubit.get(context).changeArchive(model);
+                          NoteCubit.get(context).setArchive(model);
                         },
                         icon: Icon(
                           Icons.add,
