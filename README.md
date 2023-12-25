@@ -2,17 +2,17 @@
 
 ##                                                                      Languages and Tools
 ### Frontend (Flutter)
-##### Clone the repository.
-##### Navigate to the frontend directory.
-##### Run 'flutter pub get' to install dependencies.
-##### Use Flutter CLI commands to run the app on your preferred device/emulator.
+##### 1- Clone the repository.
+##### 2- Navigate to the frontend directory.
+##### 3- Run 'flutter pub get' to install dependencies.
+##### 4- Use Flutter CLI commands to run the app on your preferred device/emulator.
 
 ### Backend (Node.js + MongoDB)
-##### Clone the repository.
-##### Navigate to the backend directory.
-##### Run npm install to install dependencies.
-##### Set up MongoDB and configure the connection string in a .env file.
-##### Run npm start to start the Node.js server.
+##### 1- Clone the repository.
+##### 2- Navigate to the backend directory.
+##### 3- Run npm install to install dependencies.
+##### 4- Set up MongoDB and configure the connection string in a .env file.
+##### 5- Run npm start to start the Node.js server.
 
 
 ##                                                                        Features
