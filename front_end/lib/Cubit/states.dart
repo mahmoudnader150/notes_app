@@ -41,3 +41,5 @@ class NoteArchiveApiLoadingState extends NoteStates{}
 class NoteArchiveApiSuccessState extends NoteStates{}
 class NoteArchiveApiErrorState extends NoteStates{}
 
+// VISIBILITY
+class NoteChangeBottomSheetState extends NoteStates{}

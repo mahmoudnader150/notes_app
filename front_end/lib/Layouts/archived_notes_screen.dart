@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/Constants/components.dart';
 
 import '../Cubit/cubit.dart';
 import '../Cubit/states.dart';
 import '../Models/note_model.dart';
+import 'edit_notes_screen.dart';
 
 class ArchivedNotes extends StatelessWidget {
   const ArchivedNotes({super.key});
@@ -134,7 +136,19 @@ Widget buildNoteItem(Note note,context,int index){
                         )
                     ),
                     SizedBox(width: 20,),
-                    Icon(Icons.edit_outlined,size: 35,color: Colors.white,),
+                    IconButton(
+                        onPressed: (){
+                          print(note.id);
+                          navigateTo(context, EditNote(note: note));
+                        },
+                        icon: Icon(
+                          Icons.edit_note_outlined,
+                          size: 35.0,
+                          color: Colors.white,
+                        )
+                    ),
+                    Spacer(),
+                    Text("${showDate(note.createdAt)}",style: TextStyle(color: Colors.grey[300],fontWeight: FontWeight.w500),)
                   ],
                 )
 

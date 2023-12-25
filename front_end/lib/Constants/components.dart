@@ -108,8 +108,14 @@ maxLines: maxLines,
 );
 
 
-
-
+String showDate(String fullDate){
+  String date="";
+  for(int i=0;i<fullDate.length;i++){
+    if(fullDate[i]=='T')break;
+    date+=fullDate[i];
+  }
+  return date;
+}
 
 void navigateTo(context,widget)=> Navigator.push(
     context,

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Note {
   late bool pinned;
   late String id;
@@ -5,13 +7,13 @@ class Note {
   late String color;
   late String content;
   late bool archived;
-  late String createdAt;
+  late dynamic createdAt;
   Note({
     this.id = "",
     this.name="name",
     this.content="",
     this.color="grey",
-    this.createdAt ="2023-12-12",
+    this.createdAt="xs",
     this.pinned = false,
     this.archived = false
   });
@@ -24,11 +26,12 @@ class Note {
       color: json['color']??"grey",
       content: json['content']??"content",
       archived: json['archived'] ?? false,
+      createdAt: json['createdAt']??DateTime.now().toString()
     );
   }
   @override
   String toString() {
-    return 'Note { pinned: $pinned, id: $id, name: $name, color: $color, content: $content, archived: $archived }';
+    return 'Note { pinned: $pinned, id: $id, name: $name, color: $color, content: $content, archived: $archived ,createdAt: $createdAt }';
   }
 }
 

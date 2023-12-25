@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:note_app/Constants/components.dart';
+import 'package:note_app/Layouts/edit_notes_screen.dart';
 
 import '../Cubit/cubit.dart';
 import '../Cubit/states.dart';
@@ -10,6 +13,7 @@ import '../Models/note_model.dart';
 
 class ShowNotes extends StatelessWidget {
   const ShowNotes({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +53,18 @@ class ShowNotes extends StatelessWidget {
 }
 
 
+
 Widget buildNoteItem(Note note,context,int index){
+  bool isVisible = false;
   Color? noteColor = Color(0xFF303030) ;
   if(note.color=="blue") noteColor = Color(0xFF01579B);
   if(note.color=="green") noteColor = Color(0xFF2E7D32);
   if(note.color=="red") noteColor =  Color(0xFFB71C1C);
+  var noteNameController = TextEditingController();
+  var noteContentController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   return InkWell(
     onTap: (){
@@ -109,13 +120,13 @@ Widget buildNoteItem(Note note,context,int index){
                    )
                  ],
                ),
-               SizedBox(height: 20,),
+               SizedBox(height: 25,),
                Text(
                  note.content,
                  maxLines: 3,
                  style: TextStyle(fontSize: 16,color: Colors.white70),
                ),
-               SizedBox(height: 20,),
+               SizedBox(height: 25,),
                Row(
                  children: [
                    IconButton(
@@ -131,7 +142,7 @@ Widget buildNoteItem(Note note,context,int index){
                    SizedBox(width: 20,),
                    IconButton(
                        onPressed: (){
-                           print(note.id);
+                           //print(note.id);
                            NoteCubit.get(context).deleteData(note);
                        },
                        icon: Icon(
@@ -141,14 +152,27 @@ Widget buildNoteItem(Note note,context,int index){
                        )
                    ),
                    SizedBox(width: 20,),
-                   Icon(Icons.edit_outlined,size: 35,color: Colors.white,),
+                   IconButton(
+                       onPressed: () {
+                          navigateTo(context, EditNote(note: note));
+                       },
+                       icon: Icon(
+                         Icons.edit_note_outlined,
+                         size: 35.0,
+                         color: Colors.white,
+                       )
+                   ),
+                   Spacer(),
+                   Text("${showDate(note.createdAt)}",style: TextStyle(color: Colors.grey[300],fontWeight: FontWeight.w500),)
                  ],
-               )
+               ),
 
-            ],
-      ),
+
+          ]
+
+
         ),
 
       ),
-    ));
+    )));
 }
