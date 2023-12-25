@@ -17,7 +17,7 @@ const noteSchema = mongoose.Schema({
     createdAt:{
      type:Date,
      default:Date.now(),
-     select: false
+ 
     },
     archived:{
         type:Boolean,

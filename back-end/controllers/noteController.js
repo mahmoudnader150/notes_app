@@ -35,50 +35,26 @@ exports.getAllNotes = async (req,res)=>
         console.log(req.query)
         // 1A) filtering
         const queryObj = { ...req.query };
-        const excludedFields = ['page', 'sort', 'limit', 'fields']; // Corrected variable name
-        excludedFields.forEach(field => delete queryObj[field]);
+      
         console.log(queryObj);
        
         // 1B) Advance filtering
     
         let queryStr = JSON.stringify(queryObj); // Change from const to let
-        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-        console.log(JSON.parse(queryStr));
+       
       
-        let query = Note.find(JSON.parse(queryStr));
+      
         
         // 2) Sorting
-        if(req.query.sort){ 
-            const sortBy = req.query.sort.split(',').join(' '); 
-            query = query.sort(sortBy);
-        }else{
-            query = query.sort('-createdAt');
-        }
+       
 
-        // 3) field limiting
-        if(req.query.fields){
-            const fields = req.query.fields.split(',').join(' ');
-            query = query.select(fields);
-        }else{
-            query = query.select('-__v')
-        }
+       
+
+        
         
 
-        // 4) pagination
-        const page = req.query.page * 1 || 1;
-        const limit = req.query.limit * 1 || 100;
-        const skip = (page-1) *limit;
-
-        query = query.skip(skip).limit(limit);
-   
-        if(req.query.page){
-            const numNotes = await Note.countDocuments();
-            if(skip>=numNotes) throw new Error('This page does not exist');
-        }
-
-
         // EXECUTE QUERY
-        const notes = await query;
+        const notes = await Note.find(JSON.parse(queryStr))
 
         
 
