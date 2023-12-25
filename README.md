@@ -1,6 +1,6 @@
 # Notes App
 
-## Languages and Tools
+##                                                                      Languages and Tools
 ### Frontend (Flutter)
 ##### Clone the repository.
 ##### Navigate to the frontend directory.
@@ -15,7 +15,7 @@
 ##### Run npm start to start the Node.js server.
 
 
-## Features
+##                                                                        Features
 ## 1- Add Note
 
 #### Endpoint
