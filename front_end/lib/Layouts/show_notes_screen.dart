@@ -66,6 +66,14 @@ Widget buildNoteItem(Note note,context,int index){
         margin: EdgeInsets.all(12.0),
 
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.8),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
           color: noteColor,
           border: Border.all(color: noteColor, width: 2.0),
           borderRadius: BorderRadius.circular(16.0),
@@ -73,7 +81,6 @@ Widget buildNoteItem(Note note,context,int index){
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-
             mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -113,7 +120,7 @@ Widget buildNoteItem(Note note,context,int index){
                  children: [
                    IconButton(
                      onPressed: (){
-                       NoteCubit.get(context).setArchive(note);
+                       NoteCubit.get(context).updateArchive(note);
                      },
                      icon: Icon(
                            Icons.archive_outlined,
@@ -125,7 +132,7 @@ Widget buildNoteItem(Note note,context,int index){
                    IconButton(
                        onPressed: (){
                            print(note.id);
-                           NoteCubit.get(context).deleteData(note.id);
+                           NoteCubit.get(context).deleteData(note);
                        },
                        icon: Icon(
                          Icons.delete_rounded,

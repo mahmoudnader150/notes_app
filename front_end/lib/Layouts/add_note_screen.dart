@@ -32,6 +32,7 @@ class AddNote extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 30,),
                       Text(
                         "Fill the following fields:",
                         style: TextStyle(
@@ -40,7 +41,7 @@ class AddNote extends StatelessWidget {
                             color: Colors.grey[800]
                         ),
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(height: 30,),
                       defaultFormField(
                           controller: noteNameController,
                           type: TextInputType.text,
@@ -52,16 +53,16 @@ class AddNote extends StatelessWidget {
                           label: "Note Name",
                           prefix: Icons.title
                       ),
-                      SizedBox(height: 25,),
+                      SizedBox(height: 30,),
                       defaultFormField(
                           controller: noteContentController,
                           type: TextInputType.text,
                           validate: (value){},
                           label: "Note Content (optional)",
                           prefix: Icons.view_headline_sharp,
-                        maxLines: 5
+                        maxLines: 7
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 25,),
                       Row(
                          children: [
                            Text("Select color :",
@@ -69,7 +70,7 @@ class AddNote extends StatelessWidget {
                              fontSize: 20,
                              color: Colors.grey[800]
                            ),),
-                           SizedBox(width: 20,),
+                           SizedBox(width: 25,),
                            Container(
                              child: Row(
                                children: [
@@ -83,7 +84,7 @@ class AddNote extends StatelessWidget {
                                      backgroundColor: Color(0xFFB71C1C),
                                    ),
                                  ),
-                                 SizedBox(width: 20,),
+                                 SizedBox(width: 25,),
                                  InkWell(
                                    onTap: (){
                                      NoteCubit.get(context).setColor("blue");
@@ -94,7 +95,7 @@ class AddNote extends StatelessWidget {
                                      backgroundColor: Color(0xFF01579B),
                                    ),
                                  ),
-                                 SizedBox(width: 20,),
+                                 SizedBox(width: 25,),
                                  InkWell(
                                    onTap: (){
                                      NoteCubit.get(context).setColor("green");
@@ -110,16 +111,18 @@ class AddNote extends StatelessWidget {
                            )
                          ],
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 25,),
                       defaultButton(function: ()async{
                         if(formKey.currentState!.validate()) {
                           NoteCubit.get(context).postData(noteNameController.text, noteContentController.text,NoteCubit.get(context).cubitColor);                          // Note note = Note(name:noteNameController.text,content: noteContentController.text );
                           // print(note);
                           NoteCubit.get(context).fetchDataFromBackend();
-
+                          noteNameController.text = "";
+                          noteContentController.text = "";
+                          NoteCubit.get(context).setColor("grey");
                         }
                       }, text: "Add Note"),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 25,),
                       defaultButton(function: (){
                         noteNameController.text = "";
                         noteContentController.text = "";
