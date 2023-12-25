@@ -32,7 +32,7 @@ Adds a new note with a name, content, and color representation.
 {
   "name": "Note Name",
   "content": "Note Content",
-  "color": "green" // Color in hexadecimal format
+  "color": "green" 
 }
 ```
 
@@ -68,7 +68,7 @@ Updates an existing note with new content, name, or color.
 {
   "name": "Updated Note Name",
   "content": "Updated Note Content",
-  "color": "red" // Updated color in hexadecimal format
+  "color": "red"
 }
 ```
 
