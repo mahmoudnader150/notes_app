@@ -17,11 +17,6 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.grey[400],
-              actions: [
-                IconButton(onPressed: (){
-                  NoteCubit.get(context).changeAppMode();
-                }, icon: Icon(Icons.sunny_snowing,color:Colors.grey[800] ,))
-              ],
               title:  Center(child: Text(cubit.titles[cubit.currentIndex],style: TextStyle(color: Colors.grey[800]),)),
               elevation: 0.0,
             ),
